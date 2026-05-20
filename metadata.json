@@ -1,0 +1,6 @@
+{
+  "name": "Different Hadiths of the Prophet",
+  "description": "د رسول الله مبارک او بېلابېل احادیث په پښتو، فارسي او عربي بڼو د لوستونکو د اسانتیا لپاره وړاندې کوي.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
