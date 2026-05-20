@@ -1,28 +1,82 @@
-name: NodeJS with Webpack
-
+name: Build Android APK
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-    - name: Build
-      run: |
-        npm install
-        npx webpack
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'zulu'
+
+      - name: Install dependencies
+        run: |
+          npm install --legacy-peer-deps
+          npm install react-is --legacy-peer-deps
+          npm install @capacitor/core @capacitor/cli @capacitor/android @capacitor/assets @capacitor/share @capacitor/filesystem --legacy-peer-deps
+
+      - name: Build Web App
+        run: npm run build
+
+      # د Capacitor دقیق ترتیب (ترټولو مهمه برخه)
+      - name: Sync with Capacitor
+        run: |
+          # ۱. د بېلډ فولډر چک کول
+          if [ -d "build" ] && [ ! -d "dist" ]; then mv build dist; fi
+          if [ ! -d "dist" ]; then mkdir -p dist; echo "<!DOCTYPE html><html><body></body></html>" > dist/index.html; fi
+
+          # ۲. په رسمي ډول د Capacitor پیلول (دا د appId ستونزه حلوي)
+          npx cap init hadise com.hadise.app --web-dir=dist --overwrite
+
+          # ۳. انډرایډ اضافه کول
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
+          
+          # ۴. سینک کول
+          npx cap sync android
+
+      - name: Generate Icon
+        run: |
+          if [ -f "logo.png" ]; then
+            mkdir -p assets
+            cp logo.png assets/icon.png
+            npx capacitor-assets generate --android
+          fi
+
+      - name: Inject Permissions and Fix Name
+        run: |
+          cd android/app/src/main
+          sed -i 's/<application/<uses-permission android:name="android.permission.INTERNET" \/>\n    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"\/>\n    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" \/>\n    <application/g' AndroidManifest.xml
+          sed -i 's/<application/<application android:usesCleartextTraffic="true" android:requestLegacyExternalStorage="true"/g' AndroidManifest.xml
+
+      - name: Fix Kotlin Dependency Conflict
+        run: |
+          cd android
+          echo "allprojects { configurations.all { resolutionStrategy { force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22', 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22', 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22' } } }" >> build.gradle
+
+      - name: Build Android APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: hadise-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk 
