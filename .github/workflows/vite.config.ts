@@ -7,6 +7,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
+    base:
+    base: './', 
       contents: write
     steps:
       - name: Checkout Code
