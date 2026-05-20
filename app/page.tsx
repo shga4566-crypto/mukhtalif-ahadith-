@@ -284,7 +284,7 @@ export default function Home() {
     const randomHadith = data.hadiths[Math.floor(Math.random() * data.hadiths.length)];
     setTestNotificationToast({
       show: true,
-      title: activeLang === 'ps' ? 'د نن ورځې خبرتیا (په هرو ۲۴ ساعتونو کې راځي)' : activeLang === 'fa' ? 'نمونه اعلان روزانه (هر ۲۴ ساعت)' : 'Daily Notification Triggered',
+      title: activeLang === 'ps' ? 'د نن ورځې خبرتیا (په هرو ۲4 ساعتونو کې راځي)' : activeLang === 'fa' ? 'نمونه اعلان روزانه (هر ۲4 ساعت)' : activeLang === 'ar' ? 'إشعار اليوم (يصل كل ٢٤ ساعة)' : 'Daily Notification Triggered',
       body: randomHadith.text[activeLang] || randomHadith.text['ps'],
     });
 
@@ -713,7 +713,7 @@ export default function Home() {
                             textMain={t.textMain} 
                           />
                           <span className={`text-xs md:text-sm font-bold ${t.textMain} px-3 py-1 rounded-full border ${isDark ? `${c.bgBadge} ${c.borderCard}` : `${t.bgLightSoft} ${t.borderSoft}`}`}>
-                            {activeLang === 'ps' ? 'حدیث شمېره' : activeLang === 'fa' ? 'حدیث شماره' : 'Hadith'}
+                            {activeLang === 'ps' ? 'حدیث شمېره' : activeLang === 'fa' ? 'حدیث شماره' : activeLang === 'ar' ? 'حديث رقم' : 'Hadith'}
                           </span>
                         </div>
                       </div>
@@ -783,7 +783,7 @@ export default function Home() {
                         <div className={`flex items-center gap-2 border shadow-sm px-4 py-2 rounded-xl ${
                           isDark ? `${c.bgBadge} ${c.borderCard} text-amber-100` : 'text-neutral-700 bg-white border-neutral-200'
                         }`}>
-                          <span className="text-neutral-400 text-sm font-medium">{activeLang === 'ps' ? 'راوي:' : activeLang === 'fa' ? 'راوی:' : 'Narrator:'}</span>
+                          <span className="text-neutral-400 text-sm font-medium">{activeLang === 'ps' ? 'راوي:' : activeLang === 'fa' ? 'راوی:' : activeLang === 'ar' ? 'الراوي:' : 'Narrator:'}</span>
                           <span 
                             className="font-bold"
                             style={{ fontFamily: activeLang === 'ps' || activeLang === 'fa' || activeLang === 'ar' ? 'var(--font-amiri), serif' : 'inherit' }}
@@ -830,10 +830,10 @@ export default function Home() {
                   <Search className={`w-10 h-10 ${t.iconColorLight} -rotate-3`} />
                 </div>
                 <h3 className={`text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-neutral-800'}`}>
-                  {activeLang === 'ps' ? 'هیڅ پایله ونه موندل شوه' : activeLang === 'fa' ? 'هیچ نتیجه‌ای یافت نشد' : 'No results found'}
+                  {activeLang === 'ps' ? 'هیڅ پایله ونه موندل شوه' : activeLang === 'fa' ? 'هیچ نتیجه‌ای یافت نشد' : activeLang === 'ar' ? 'لم يتم العثور على نتائج' : 'No results found'}
                 </h3>
                 <p className="text-neutral-500 font-medium">
-                  {activeLang === 'ps' ? 'بله کلمه وپلټئ یا کټګوري بدله کړئ.' : activeLang === 'fa' ? 'کلمه دیگری را جستجو کنید یا دسته‌بندی را تغییر دهید.' : 'Try searching for a different keyword or category.'}
+                  {activeLang === 'ps' ? 'بله کلمه وپلټئ یا کټګوري بدله کړئ.' : activeLang === 'fa' ? 'کلمه دیگری را جستجو کنید یا دسته‌بندی را تغییر دهید.' : activeLang === 'ar' ? 'جرّب البحث عن كلمة أخرى أو تغيير التصنيف.' : 'Try searching for a different keyword or category.'}
                 </p>
               </motion.div>
             )}
@@ -865,7 +865,7 @@ export default function Home() {
                     <div className={`${isDark ? `${c.bgBadge} text-amber-400` : `${t.bgLight}`} p-2 rounded-xl`}>
                       <Settings className={`w-5 h-5 ${isDark ? 'text-amber-400' : t.iconText}`} />
                     </div>
-                    {activeLang === 'ps' ? 'تنظیمات' : activeLang === 'fa' ? 'تنظیمات' : 'Settings'}
+                    {activeLang === 'ps' ? 'تنظیمات' : activeLang === 'fa' ? 'تنظیمات' : activeLang === 'ar' ? 'الإعدادات' : 'Settings'}
                   </h3>
                   <button 
                     onClick={() => setIsSettingsOpen(false)}
@@ -880,7 +880,7 @@ export default function Home() {
                   <div>
                     <label className={`flex items-center gap-2 text-base font-bold mb-4 ${isDark ? 'text-zinc-100' : 'text-neutral-800'}`}>
                       <Sun className={`w-5 h-5 ${t.textMain}`} />
-                      {activeLang === 'ps' ? 'اپلیکیشن رڼا که تیاره' : activeLang === 'fa' ? 'ظاهر برنامه (روشن / تاریک)' : 'Theme Mode'}
+                      {activeLang === 'ps' ? 'اپلیکیشن رڼا که تیاره' : activeLang === 'fa' ? 'ظاهر برنامه (روشن / تاریک)' : activeLang === 'ar' ? 'مظهر التطبيق (فاتح / داكن)' : 'Theme Mode'}
                     </label>
                     <div className={`flex p-1.5 rounded-2xl w-full border ${isDark ? `${c.bgBadge} ${c.borderModal}` : 'bg-neutral-100/80 border-neutral-200/50'}`}>
                       <button 
@@ -892,7 +892,7 @@ export default function Home() {
                         }`}
                       >
                         <Sun className="w-4 h-4" />
-                        {activeLang === 'ps' ? 'رڼه روښانه' : activeLang === 'fa' ? 'روشن' : 'Light'}
+                        {activeLang === 'ps' ? 'رڼه روښانه' : activeLang === 'fa' ? 'روشن' : activeLang === 'ar' ? 'فاتح' : 'Light'}
                       </button>
                       <button 
                         onClick={() => changeThemeMode('dark')}
@@ -903,7 +903,7 @@ export default function Home() {
                         }`}
                       >
                         <Moon className="w-4 h-4" />
-                        {activeLang === 'ps' ? 'توره تیاره' : activeLang === 'fa' ? 'تاریک' : 'Dark'}
+                        {activeLang === 'ps' ? 'توره تیاره' : activeLang === 'fa' ? 'تاریک' : activeLang === 'ar' ? 'داكن' : 'Dark'}
                       </button>
                     </div>
                   </div>
@@ -921,10 +921,10 @@ export default function Home() {
                         </div>
                         <div>
                           <h4 className={`text-sm font-bold ${isDark ? 'text-zinc-100' : 'text-neutral-800'}`}>
-                            {activeLang === 'ps' ? '۲۴ ساعته حدیث پیغامونه' : activeLang === 'fa' ? 'اعلان ۲۴ ساعته حدیث' : '24-Hour Hadith Alert'}
+                            {activeLang === 'ps' ? '۲۴ ساعته حدیث پیغامونه' : activeLang === 'fa' ? 'اعلان ۲۴ ساعته حدیث' : activeLang === 'ar' ? 'تنبيه الحديث اليومي' : '24-Hour Hadith Alert'}
                           </h4>
                           <p className="text-xs text-neutral-550 mt-1 leading-relaxed">
-                            {activeLang === 'ps' ? 'په ۲۴ ساعتونو کې یو تصادفي حدیث موبایل ته د نوټیفیکیشن په بڼه راځي.' : activeLang === 'fa' ? 'ارسال خودکار یک حدیث تصادفی به موبایل هر ۲۴ ساعت.' : 'Pick a random blessed hadith block as a lockscreen alert.'}
+                            {activeLang === 'ps' ? 'په ۲۴ ساعتونو کې یو تصادفي حدیث موبایل ته د نوټیفیکیشن په بڼه راځي.' : activeLang === 'fa' ? 'ارسال خودکار یک حدیث تصادفی به موبایل هر ۲۴ ساعت.' : activeLang === 'ar' ? 'يتلقى جهازك تنبيهًا بحديث عشوائي كل ٢٤ ساعة تلقائيًا.' : 'Pick a random blessed hadith block as a lockscreen alert.'}
                           </p>
                         </div>
                       </div>
@@ -952,7 +952,7 @@ export default function Home() {
                       }`}
                     >
                       <Zap className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
-                      {activeLang === 'ps' ? 'خبرتیا وازموئ (همدا اوس حدیث واستوئ)' : activeLang === 'fa' ? 'آزمایش فوری اعلان (ارسال حدیث به دستگاه)' : 'Test Message Alert Now'}
+                      {activeLang === 'ps' ? 'خبرتیا وازموئ (همدا اوس حدیث واستوئ)' : activeLang === 'fa' ? 'آزمایش فوری اعلان (ارسال حدیث به دستگاه)' : activeLang === 'ar' ? 'جرّب الإشعار الآن (إرسال حديث لحسابك)' : 'Test Message Alert Now'}
                     </button>
                   </div>
 
@@ -960,7 +960,7 @@ export default function Home() {
                   <div>
                     <label className={`flex items-center gap-2 text-base font-bold mb-4 ${isDark ? 'text-zinc-100' : 'text-neutral-800'}`}>
                       <Palette className={`w-5 h-5 ${t.textMain}`} />
-                      {activeLang === 'ps' ? 'د اپلیکیشن رنګ' : activeLang === 'fa' ? 'رنگ برنامه' : 'App Color'}
+                      {activeLang === 'ps' ? 'د اپلیکیشن رنګ' : activeLang === 'fa' ? 'رنگ برنامه' : activeLang === 'ar' ? 'لون التطبيق' : 'App Color'}
                     </label>
                     <div className="flex gap-4">
                       {(['amber', 'emerald', 'rose'] as ThemeColor[]).map((color) => (
@@ -980,7 +980,7 @@ export default function Home() {
                   <div>
                     <label className={`flex items-center gap-2 text-base font-bold mb-4 ${isDark ? 'text-zinc-100' : 'text-neutral-800'}`}>
                       <Type className={`w-5 h-5 ${t.textMain}`} />
-                      {activeLang === 'ps' ? 'د لیکلو کچه' : activeLang === 'fa' ? 'اندازه متن' : 'Text Size'}
+                      {activeLang === 'ps' ? 'د لیکلو کچه' : activeLang === 'fa' ? 'اندازه متن' : activeLang === 'ar' ? 'حجم الخط' : 'Text Size'}
                     </label>
                     <div className={`flex p-1.5 rounded-2xl w-full border ${isDark ? `${c.bgBadge} ${c.borderModal}` : 'bg-neutral-100/80 border-neutral-200/50'}`}>
                       {(['normal', 'large', 'xlarge'] as FontSize[]).map((size) => (
@@ -994,10 +994,10 @@ export default function Home() {
                           }`}
                         >
                           {size === 'normal' 
-                            ? (activeLang === 'ps' ? 'عادي' : activeLang === 'fa' ? 'عادی' : 'Normal')
+                            ? (activeLang === 'ps' ? 'عادي' : activeLang === 'fa' ? 'عادی' : activeLang === 'ar' ? 'عادي' : 'Normal')
                             : size === 'large'
-                            ? (activeLang === 'ps' ? 'لوی' : activeLang === 'fa' ? 'بزرگ' : 'Large')
-                            : (activeLang === 'ps' ? 'خورا لوی' : activeLang === 'fa' ? 'خیلی بزرگ' : 'X-Large')
+                            ? (activeLang === 'ps' ? 'لوی' : activeLang === 'fa' ? 'بزرگ' : activeLang === 'ar' ? 'كبير' : 'Large')
+                            : (activeLang === 'ps' ? 'خورا لوی' : activeLang === 'fa' ? 'خیلی بزرگ' : activeLang === 'ar' ? 'كبير جداً' : 'X-Large')
                           }
                         </button>
                       ))}
@@ -1008,7 +1008,7 @@ export default function Home() {
                   <div>
                     <label className={`flex items-center gap-2 text-base font-bold mb-4 ${isDark ? 'text-zinc-100' : 'text-neutral-800'}`}>
                       <LayoutTemplate className={`w-5 h-5 ${t.textMain}`} />
-                      {activeLang === 'ps' ? 'د شالید ډیزاین' : activeLang === 'fa' ? 'طرح پس‌زمینه' : 'Background Pattern'}
+                      {activeLang === 'ps' ? 'د شالید ډیزاین' : activeLang === 'fa' ? 'طرح پس‌زمینه' : activeLang === 'ar' ? 'نمط الخلفية' : 'Background Pattern'}
                     </label>
                     <div className="grid grid-cols-2 gap-3">
                       {(['minimal', 'geometric'] as ThemePattern[]).map((pattern) => (
@@ -1022,8 +1022,8 @@ export default function Home() {
                           }`}
                         >
                           {pattern === 'minimal' 
-                            ? (activeLang === 'ps' ? 'ساده' : activeLang === 'fa' ? 'ساده' : 'Minimal')
-                            : (activeLang === 'ps' ? 'هندسي' : activeLang === 'fa' ? 'هندسی' : 'Geometric')
+                            ? (activeLang === 'ps' ? 'ساده' : activeLang === 'fa' ? 'ساده' : activeLang === 'ar' ? 'بسيط' : 'Minimal')
+                            : (activeLang === 'ps' ? 'هندسي' : activeLang === 'fa' ? 'هندسی' : activeLang === 'ar' ? 'هندسي' : 'Geometric')
                           }
                         </button>
                       ))}
@@ -1062,7 +1062,7 @@ export default function Home() {
                   <div className={`pt-6 border-t ${isDark ? c.borderModal : 'border-neutral-100'}`}>
                     <h4 className={`flex items-center gap-2 text-base font-bold mb-4 ${isDark ? 'text-zinc-100' : 'text-neutral-800'}`}>
                       <User className={`w-5 h-5 ${t.textMain}`} />
-                      {activeLang === 'ps' ? 'له موږ سره اړیکه' : activeLang === 'fa' ? 'تماس با ما' : 'Contact Us'}
+                      {activeLang === 'ps' ? 'له موږ سره اړیکه' : activeLang === 'fa' ? 'تماس با ما' : activeLang === 'ar' ? 'اتصل بنا' : 'Contact Us'}
                     </h4>
                     <div className="space-y-3 font-sans text-sm">
                       <a href="mailto:shga4566@gmail.com" className={`flex items-center gap-3 p-3 rounded-xl border transition-colors w-full ${
@@ -1091,7 +1091,7 @@ export default function Home() {
                     onClick={() => setIsSettingsOpen(false)}
                     className={`w-full ${t.btnActive} hover:opacity-90 font-bold py-4 rounded-2xl transition-all shadow-lg mt-6`}
                   >
-                    {activeLang === 'ps' ? 'پلي کول' : activeLang === 'fa' ? 'تایید' : 'Apply Settings'}
+                    {activeLang === 'ps' ? 'پلي کول' : activeLang === 'fa' ? 'تایید' : activeLang === 'ar' ? 'تطبيق الإعدادات' : 'Apply Settings'}
                   </button>
                 </div>
               </div>
@@ -1129,11 +1129,11 @@ export default function Home() {
                 </div>
                 
                 <h3 className={`text-xl font-bold ${isDark ? 'text-zinc-50' : 'text-neutral-900'}`} style={{ fontFamily: 'var(--font-amiri), serif' }}>
-                  {activeLang === 'ps' ? 'له اپلیکیشن څخه وتل' : activeLang === 'fa' ? 'خروج از برنامه' : 'Exit Application'}
+                  {activeLang === 'ps' ? 'له اپلیکیشن څخه وتل' : activeLang === 'fa' ? 'خروج از برنامه' : activeLang === 'ar' ? 'الخروج من التطبيق' : 'Exit Application'}
                 </h3>
                 
                 <p className={`text-sm ${isDark ? 'text-zinc-300' : 'text-neutral-600'} leading-relaxed`} style={{ fontFamily: 'var(--font-amiri), serif' }}>
-                  {activeLang === 'ps' ? 'ایا تاسو ډاډه یاست چې غواړئ له اپلیکیشن څخه بهر شئ؟' : activeLang === 'fa' ? 'آیا مطمئن هستید که می‌خواهید از برنامه خارج شوید؟' : 'Are you sure you want to leave and exit the application?'}
+                  {activeLang === 'ps' ? 'ایا تاسو ډاډه یاست چې غواړئ له اپلیکیشن څخه بهر شئ؟' : activeLang === 'fa' ? 'آیا مطمئن هستید که می‌خواهید از برنامه خارج شوید؟' : activeLang === 'ar' ? 'هل أنت متأكد من رغبتك في مغادرة التطبيق وإغلاقه؟' : 'Are you sure you want to leave and exit the application?'}
                 </p>
                 
                 {/* Yes/No Buttons */}
@@ -1152,7 +1152,7 @@ export default function Home() {
                     }}
                     className="flex-1 py-3 px-4 rounded-xl text-white font-bold bg-gradient-to-r from-red-600 to-rose-600 hover:opacity-95 transition-all shadow-lg shadow-red-600/20 active:scale-95 duration-200"
                   >
-                    {activeLang === 'ps' ? 'هو' : activeLang === 'fa' ? 'بله' : 'Yes'}
+                    {activeLang === 'ps' ? 'هو' : activeLang === 'fa' ? 'بله' : activeLang === 'ar' ? 'نعم' : 'Yes'}
                   </button>
                   
                   <button
@@ -1163,7 +1163,7 @@ export default function Home() {
                         : 'bg-neutral-100 hover:bg-[#eae8e0] text-neutral-800 border-neutral-200'
                     }`}
                   >
-                    {activeLang === 'ps' ? 'نا' : activeLang === 'fa' ? 'نخیر' : 'No'}
+                    {activeLang === 'ps' ? 'نا' : activeLang === 'fa' ? 'نخیر' : activeLang === 'ar' ? 'لا' : 'No'}
                   </button>
                 </div>
               </div>
